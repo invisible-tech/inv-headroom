@@ -53,9 +53,11 @@ runs:
       if: ${{ inputs.shim-target != '' && runner.os != 'Windows' }}
       id: shim-posix
       shell: bash
+      env:
+        SHIM_TARGET: ${{ inputs.shim-target }}
       run: |
         shim_dir="${RUNNER_TEMP}/headroom-e2e-shims"
-        bash e2e/_lib/make_shim.sh "${{ inputs.shim-target }}" "$shim_dir"
+        bash e2e/_lib/make_shim.sh "$SHIM_TARGET" "$shim_dir"
         echo "$shim_dir" >> "$GITHUB_PATH"
         echo "shim-dir=$shim_dir" >> "$GITHUB_OUTPUT"
 
@@ -63,9 +65,11 @@ runs:
       if: ${{ inputs.shim-target != '' && runner.os == 'Windows' }}
       id: shim-windows
       shell: pwsh
+      env:
+        SHIM_TARGET: ${{ inputs.shim-target }}
       run: |
         $shimDir = Join-Path $env:RUNNER_TEMP "headroom-e2e-shims"
-        & pwsh -File e2e/_lib/make_shim.ps1 -Name "${{ inputs.shim-target }}" -Dir $shimDir
+        & pwsh -File e2e/_lib/make_shim.ps1 -Name "$env:SHIM_TARGET" -Dir $shimDir
         Add-Content -Path $env:GITHUB_PATH -Value $shimDir
         "shim-dir=$shimDir" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 

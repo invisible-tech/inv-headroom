@@ -324,6 +324,13 @@ constraint-dependencies = [
     # GHSA-f4xh-w4cj-qxq8 (High) — transitive via langchain-core; fix at 0.8.18
     "langsmith>=0.9.0",
 ]
+override-dependencies = [
+    # AIKIDO-2026-10636 (Medium) — all transformers versions (4.x and 5.x) cap
+    # tokenizers<=0.23.0 via their metadata, blocking the patched tokenizers>=0.23.1.
+    # The resolver proof confirms no transformers version allows tokenizers>=0.23.1,
+    # so a narrowly scoped override is required to force the patched version.
+    "tokenizers>=0.23.1",
+]
 
 # Pin the project's package index to public PyPI. Without this, `uv lock`
 # inherits the developer's user-level `~/.config/uv/uv.toml` index

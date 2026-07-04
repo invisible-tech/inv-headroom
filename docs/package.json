@@ -24,7 +24,7 @@
 		"next": "16.2.6",
 		"react": "^19.2.4",
 		"react-dom": "^19.2.4",
-		"recharts": "^3.8.1",
+		"recharts": "^3.9.1",
 		"tailwind-merge": "^3.5.0"
 	},
 	"devDependencies": {
@@ -35,13 +35,14 @@
 		"@types/node": "^25.5.0",
 		"@types/react": "^19.2.14",
 		"@types/react-dom": "^19.2.3",
-		"ai": "^6.0.149",
+		"ai": "^6.0.170",
 		"openai": "^6.33.0",
 		"postcss": "^8.5.13",
 		"tailwindcss": "^4.2.2",
 		"typescript": "^5.9.3"
 	},
 	"overrides": {
-		"postcss": "$postcss"
+		"postcss": "$postcss",
+		"immer": "11.1.9"
 	}
 }

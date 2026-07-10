@@ -324,6 +324,20 @@ constraint-dependencies = [
     # GHSA-f4xh-w4cj-qxq8 (High) — transitive via langchain-core; fix at 0.8.18
     "langsmith>=0.9.0",
 ]
+override-dependencies = [
+    # AIKIDO-2026-78094 (Medium) — fsspec: fix at 2026.6.0.
+    # datasets (all versions <=5.0.0) caps fsspec at <=2026.4.0; no datasets
+    # release allows fsspec>=2026.6.0, so a normal parent bump is impossible.
+    # Override relaxes that transitive upper bound to let the resolver pick the
+    # patched version.
+    "fsspec>=2026.6.0",
+    # AIKIDO-2026-10636 (Medium) — tokenizers: fix at 0.23.1.
+    # transformers (all versions >=4.30.0,<6.0 as declared) caps tokenizers at
+    # <=0.23.0; no transformers release in that range allows tokenizers>=0.23.1,
+    # so a normal parent bump is impossible.  Override relaxes that transitive
+    # upper bound to let the resolver pick the patched version.
+    "tokenizers>=0.23.1",
+]
 
 # Pin the project's package index to public PyPI. Without this, `uv lock`
 # inherits the developer's user-level `~/.config/uv/uv.toml` index

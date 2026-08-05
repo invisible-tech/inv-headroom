@@ -319,10 +319,20 @@ constraint-dependencies = [
     "pygments>=2.20.0",
     # GHSA-4xgf-cpjx-pc3j (Medium) — transitive via mcp; fix at 2.14.2
     "pydantic-settings>=2.14.2",
-    # GHSA-mv93-w799-cj2w + 4 others (High) — transitive via lm-eval; fix at 3.1.50
-    "gitpython>=3.1.50",
+    # GHSA-mv93-w799-cj2w + others (High) — transitive via agno; fix at 3.1.57
+    "gitpython>=3.1.57",
     # GHSA-f4xh-w4cj-qxq8 (High) — transitive via langchain-core; fix at 0.8.18
     "langsmith>=0.9.0",
+    # CVE-2026-49825 (High) — transitive via trafilatura; fix at 0.4.5
+    "lxml-html-clean>=0.4.5",
+    # CVE-2026-69247/69248/69249 — transitive via mcp[crypto]; fix at 50.0.0
+    "cryptography>=50.0.0",
+]
+override-dependencies = [
+    # AIKIDO-2026-10636 (Medium) — tokenizers>=0.23.1 required; every available
+    # transformers release (4.30.0–5.x) caps tokenizers at <=0.23.0, making a
+    # normal resolver upgrade impossible. Override relaxes that transitive bound.
+    "tokenizers>=0.23.1",
 ]
 
 # Pin the project's package index to public PyPI. Without this, `uv lock`

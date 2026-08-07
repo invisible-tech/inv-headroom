@@ -105,7 +105,7 @@ ml = [
     # the floor here prevents Kompress from silently falling back to
     # "unavailable" when a sibling install (e.g. `pip install
     # strands-agents`) drags huggingface-hub backwards.
-    "huggingface-hub>=1.5.0,<2.0",
+    "huggingface-hub>=1.26.0,<2.0",
 ]
 # Memory system (hierarchical memory with vector search).
 # Uses the pure-Python sqlite-vec backend by default (VectorBackend.AUTO ->
@@ -319,10 +319,17 @@ constraint-dependencies = [
     "pygments>=2.20.0",
     # GHSA-4xgf-cpjx-pc3j (Medium) — transitive via mcp; fix at 2.14.2
     "pydantic-settings>=2.14.2",
-    # GHSA-mv93-w799-cj2w + 4 others (High) — transitive via lm-eval; fix at 3.1.50
-    "gitpython>=3.1.50",
+    # GHSA-mv93-w799-cj2w + 12 others (High/Medium) — transitive via agno; fix at 3.1.57
+    "gitpython>=3.1.57",
     # GHSA-f4xh-w4cj-qxq8 (High) — transitive via langchain-core; fix at 0.8.18
     "langsmith>=0.9.0",
+]
+# AIKIDO-2026-10636 (Medium) — tokenizers 0.23.1 required; all published
+# transformers>=4.30.0 cap tokenizers<=0.23.0 in their metadata, making a
+# normal resolution impossible. Override to allow the patched version while
+# keeping transformers functional at runtime (the tokenizers API is stable).
+override-dependencies = [
+    "tokenizers>=0.23.1",
 ]
 
 # Pin the project's package index to public PyPI. Without this, `uv lock`

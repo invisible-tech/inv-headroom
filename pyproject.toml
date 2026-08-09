@@ -319,10 +319,21 @@ constraint-dependencies = [
     "pygments>=2.20.0",
     # GHSA-4xgf-cpjx-pc3j (Medium) — transitive via mcp; fix at 2.14.2
     "pydantic-settings>=2.14.2",
-    # GHSA-mv93-w799-cj2w + 4 others (High) — transitive via lm-eval; fix at 3.1.50
-    "gitpython>=3.1.50",
+    # GHSA-mv93-w799-cj2w + 18 others (High/Medium) — transitive via agno; fix at 3.1.58
+    "gitpython>=3.1.58",
     # GHSA-f4xh-w4cj-qxq8 (High) — transitive via langchain-core; fix at 0.8.18
     "langsmith>=0.9.0",
+    # CVE-2026-71554 (Medium) — transitive via httpx[http2]; fix at 4.4.1
+    "h2>=4.4.1",
+]
+override-dependencies = [
+    # AIKIDO-2026-10636 (Medium) — tokenizers 0.23.1 patches the CVE but every
+    # available transformers>=4.30.0 metadata caps tokenizers<=0.23.0, while
+    # fastembed>=0.4.0 (also present) requires tokenizers>=0.23.1.  The two
+    # transitive upper-bounds are irreconcilable without an override.  This
+    # narrowly-scoped override relaxes only the transformers-imposed ceiling so
+    # the resolver can select the patched tokenizers release.
+    "tokenizers>=0.23.1",
 ]
 
 # Pin the project's package index to public PyPI. Without this, `uv lock`

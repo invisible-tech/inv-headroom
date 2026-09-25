@@ -324,6 +324,13 @@ constraint-dependencies = [
     # GHSA-f4xh-w4cj-qxq8 (High) — transitive via langchain-core; fix at 0.8.18
     "langsmith>=0.9.0",
 ]
+override-dependencies = [
+    # AIKIDO-2026-256263 (Medium) — fsspec <=2026.6.0 is vulnerable; fix at 2026.7.0.
+    # datasets (all published versions through 5.0.1+) caps fsspec at <=2026.6.0, so no
+    # normal parent-bump path can reach the patched version. Override forces the resolver
+    # past that transitive upper bound.
+    "fsspec>=2026.7.0",
+]
 
 # Pin the project's package index to public PyPI. Without this, `uv lock`
 # inherits the developer's user-level `~/.config/uv/uv.toml` index

@@ -53,7 +53,7 @@ dependencies = [
     # model registry / pricing / non-core providers — all lazily imported and
     # ImportError-guarded. Marking it 3.14-optional lets headroom install on Python 3.14
     # (core compression + the Anthropic proxy path never import litellm). See GH #956.
-    "litellm>=1.86.2,<2.0; python_version < '3.14'",  # model registry, pricing, providers (lazy)
+    "litellm>=1.88.6,<2.0; python_version < '3.14'",  # model registry, pricing, providers (lazy)
     "click>=8.1.0",               # CLI framework
     "rich>=13.0.0",               # Rich terminal output
     "opentelemetry-api>=1.24.0",  # Safe no-op OTEL API for instrumentation
@@ -259,7 +259,7 @@ dev = [
     "pre-commit>=3.0.0",
     "openai>=1.0.0",
     "anthropic>=0.18.0",
-    "litellm>=1.86.2,<2.0; python_version < '3.14'",  # see core deps note (GH #956)
+    "litellm>=1.88.6,<2.0; python_version < '3.14'",  # see core deps note (GH #956)
     "fastapi>=0.100.0",
     "uvicorn>=0.23.0,<1.0",
     "httpx[http2]>=0.24.0",
@@ -319,10 +319,15 @@ constraint-dependencies = [
     "pygments>=2.20.0",
     # GHSA-4xgf-cpjx-pc3j (Medium) — transitive via mcp; fix at 2.14.2
     "pydantic-settings>=2.14.2",
-    # GHSA-mv93-w799-cj2w + 4 others (High) — transitive via lm-eval; fix at 3.1.50
-    "gitpython>=3.1.50",
+    # GHSA-mv93-w799-cj2w + 4 others (High) + GHSA-59cr-6r3x-644w (Medium) — transitive via agno; fix at 3.1.62
+    "gitpython>=3.1.62",
     # GHSA-f4xh-w4cj-qxq8 (High) — transitive via langchain-core; fix at 0.8.18
     "langsmith>=0.9.0",
+]
+override-dependencies = [
+    # AIKIDO-2026-78094 + AIKIDO-2026-256263 — datasets caps fsspec below 2026.7.0 in all
+    # published releases; override to allow the patched floor while datasets still resolves.
+    "fsspec>=2026.7.0",
 ]
 
 # Pin the project's package index to public PyPI. Without this, `uv lock`

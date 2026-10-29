@@ -22,7 +22,7 @@ tokenizers = "0.22"
 # with `rustls` (no system OpenSSL dep — keeps the binary static-linkable for
 # AWS deploys). `from_pretrained` is called once at startup, so blocking is
 # fine; if a tokio caller needs it later we can wrap in `spawn_blocking`.
-hf-hub = { version = "0.4", default-features = false, features = ["ureq", "rustls-tls"] }
+hf-hub = { version = "=0.5.0", default-features = false, features = ["ureq", "rustls-tls"] }
 # `md5` for the CCR cache_key. Python's compression_store hashes the original
 # diff with MD5 truncated to 24 hex chars; we must match byte-for-byte.
 md-5 = "0.10"
@@ -121,6 +121,7 @@ redis = { version = "0.27", optional = true, default-features = false }
 # classifier live with the other Phase B/F policy primitives without
 # cycling through the proxy crate. Tiny crate (no I/O, just types).
 http = "1"
+proptest = "=1.12.0"
 
 [target.'cfg(not(windows))'.dependencies]
 fastembed = { version = "5", default-features = false, features = [

@@ -56,7 +56,7 @@ dependencies = [
     "litellm>=1.86.2,<2.0; python_version < '3.14'",  # model registry, pricing, providers (lazy)
     "click>=8.1.0",               # CLI framework
     "rich>=13.0.0",               # Rich terminal output
-    "opentelemetry-api>=1.24.0",  # Safe no-op OTEL API for instrumentation
+    "opentelemetry-api>=1.45.2",  # Safe no-op OTEL API for instrumentation
     "ast-grep-cli>=0.30.0",       # AST-aware code slicing (CodeCompressor); binary wheel
     "tomli>=2.0.0; python_version < '3.11'",  # tomllib backport for helper scripts
 ]
